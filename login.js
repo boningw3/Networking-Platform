@@ -9,18 +9,6 @@ const passwordInputEl = document.getElementById("password")
 
 const loginButtonEl = document.getElementById("login-btn")
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      const uid = user.uid;
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
-
 function authSignInWithEmail(event) {
     /*  
         Use the code from the documentaion to make this function work.
@@ -39,7 +27,9 @@ function authSignInWithEmail(event) {
         // Signed in 
         const user = userCredential.user;
         console.log("Login succeed!")
+        clearAuthFields()
         window.location.href = "user_page.html";
+        
     })
     .catch((error) => {
         const errorCode = error.code;
@@ -68,3 +58,14 @@ function authSignOut() {
         })
 }
 
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
